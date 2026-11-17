@@ -33,7 +33,7 @@ end
 local server = M.newInstance("Folder")
 server.Name = "Server"
 server.Parent = S.ServerScriptService
-for _, n in ipairs({ "DataService", "WorldService", "ProgressionService", "CombatCore", "CreatureFactory", "Companions", "Encounters", "ShopService" }) do
+for _, n in ipairs({ "DataService", "WorldService", "ProgressionService", "CombatCore", "CreatureFactory", "Companions", "Encounters", "ShopService", "Codes" }) do
 	makeModule(server, n, "src/server/" .. n .. ".lua")
 end
 local main = makeModule(server, "Main", "src/server/Main.server.lua", "Script")
@@ -50,6 +50,7 @@ local clientMain = makeModule(client, "Main", "src/client/Main.client.lua", "Loc
 local Config = require(shared.Config)
 Config.Products[2].id = 1111
 Config.Products[5].id = 5555
+Config.GroupId = 777
 
 local function step(seconds)
 	local n = math.floor(seconds / (1 / 30))
@@ -57,6 +58,7 @@ local function step(seconds)
 		S.RunService.Heartbeat:Fire(1 / 30)
 		S.RunService.RenderStepped:Fire(1 / 30)
 		M.advance(1 / 30)
+		M.physics()
 		M.flushClient()
 	end
 end
@@ -134,7 +136,20 @@ end
 check(modelOf(target) ~= nil, "el modelo del enemigo existe en el mundo")
 P.Character.HumanoidRootPart.CFrame = CFrame.new(target.pos + Vector3.new(6, 3, 0))
 step(0.2)
-check(State.targetModel() == modelOf(target), "el cliente apunta al enemigo cercano")
+do
+	-- debe apuntar al enemigo más cercano (normalmente el elegido)
+	local tm = State.targetModel()
+	local root = P.Character.HumanoidRootPart.Position
+	local best, bd = nil, math.huge
+	for _, m in ipairs(State.foes()) do
+		local d = (State.modelPos(m) - root).Magnitude
+		if d < bd then best, bd = m, d end
+	end
+	check(tm ~= nil and tm == best, "el cliente apunta al enemigo más cercano")
+	if tm and tm ~= modelOf(target) then
+		target = Core.entities[tm:GetAttribute("EntityId")] or target
+	end
+end
 local hp0 = target.hp
 for i = 1, 80 do
 	M.press(({ "SA_Q", "SA_E", "SA_R", "SA_F" })[i % 4 + 1])
@@ -328,8 +343,59 @@ for _, b in ipairs(M.buttons(PG)) do
 end
 check(hudClicks > 0, "botones del HUD (" .. hudClicks .. ")")
 check(menuErrors == 0, "sin errores en los menús")
+Menus.shop()
+step(0.5)
+check(#buttonsWithText("R$ 199") >= 2, "la tienda muestra el precio real de Roblox")
+check(M.priceQueries <= 4, "los precios se consultan una sola vez (" .. M.priceQueries .. ")")
+UI.closeWindow()
 for k = 1, 6 do M.press("SA_Sw" .. (k % 3 + 1)) step(0.3) end
 check(Hud ~= nil, "HUD activo")
+
+print("== códigos y grupo")
+local function redeem(code)
+	Menus.shop("codes")
+	step(0.1)
+	local box
+	for _, d in ipairs(UI.modalLayer:GetDescendants()) do if d.Name == "CodeBox" then box = d end end
+	box.Text = code
+	M.click(buttonsWithText(UI.t("redeem"))[1])
+	step(0.1)
+end
+local c0, e0 = prof.crystals, prof.essence
+redeem("  sellos ")
+check(prof.crystals == c0 + 25 and prof.essence == e0 + 500, "código SELLOS canjeado (sin distinguir mayúsculas)")
+redeem("SELLOS")
+check(prof.crystals == c0 + 25, "un código solo se canjea una vez")
+redeem("NOEXISTE")
+check(prof.crystals == c0 + 25, "código inventado rechazado")
+check(Menus.current == "shop" and Menus.shopTab == "codes", "la pestaña de códigos sigue abierta")
+-- 3 intentos hechos; el 4.º es válido, 5.º y 6.º fallan y el 7.º queda bloqueado
+local inv = S.ReplicatedStorage.Remotes.Action.OnServerInvoke
+check(inv(P, "redeem", "PRIMORDIAL") == true, "código PRIMORDIAL")
+inv(P, "redeem", "AAAA")
+inv(P, "redeem", "BBBB")
+local ok1, err1 = inv(P, "redeem", "LANZAMIENTO")
+check(ok1 == false and err1 == "codeWait", "límite de intentos contra fuerza bruta (" .. tostring(err1) .. ")")
+M.advance(61)
+check(inv(P, "redeem", "LANZAMIENTO") == true, "pasado un minuto se puede volver a canjear")
+rawset(P, "IsInGroupAsync", function(_, id) return id == 777 end)
+Menus.shop("codes")
+step(0.1)
+local cg = prof.crystals
+M.click(buttonsWithText(UI.t("groupClaim"))[1])
+step(0.2)
+check(prof.crystals == cg + 30 and prof.perks.group, "recompensa por unirse al grupo")
+check(#buttonsWithText(UI.t("groupClaim")) == 0, "la recompensa del grupo desaparece al reclamarla")
+UI.closeWindow()
+
+do
+	local accepted = 0
+	for _ = 1, 100 do
+		if S.ReplicatedStorage.Remotes.Action.OnServerInvoke(P, "sync") then accepted = accepted + 1 end
+	end
+	check(accepted <= 40, "límite de acciones por jugador (" .. accepted .. " de 100)")
+	M.advance(3)
+end
 
 print("== compra con Robux")
 local MS = S.MarketplaceService

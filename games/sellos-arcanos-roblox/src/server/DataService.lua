@@ -53,7 +53,8 @@ local function fresh()
 		contracts = { date = "", list = {} },
 		pass = { season = 1, xp = 0, premium = false, free = {}, prem = {} },
 		purchases = { receipts = {}, founder = false },
-		perks = { lastPremiumGift = "", lastVipGift = "" },
+		perks = { lastPremiumGift = "", lastVipGift = "", group = false },
+		codes = {}, -- código -> fecha en que se canjeó
 		stats = { seals = 0, perfect = 0, kills = 0, bosses = 0, ults = 0 },
 		titles = {},
 		milestones = {},

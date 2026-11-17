@@ -29,6 +29,17 @@ def all_members(cls):
 
 all_props = set()
 all_methods = set()
+deprecated = set()
+for c in dump["Classes"]:
+    for m in c["Members"]:
+        if "Deprecated" in (m.get("Tags") or []):
+            deprecated.add(m["Name"])
+# un nombre puede estar obsoleto en una clase y vigente en otra: solo avisamos
+# de los que no tienen ninguna versión vigente
+for c in dump["Classes"]:
+    for m in c["Members"]:
+        if "Deprecated" not in (m.get("Tags") or []):
+            deprecated.discard(m["Name"])
 for c in dump["Classes"]:
     for m in c["Members"]:
         if m["MemberType"] in ("Property",):
@@ -79,6 +90,8 @@ for dirpath, _, files in os.walk(root):
                     report(path, i, f"Enum.{e}.{item} no existe")
             for m in re.finditer(r'[:](\w+)\(', code):
                 name = m.group(1)
+                if name in deprecated:
+                    report(path, i, f"método obsoleto :{name}()")
                 if name[0].isupper() and name not in all_methods and name not in DATATYPE_MEMBERS and name not in ("FireServer", "FireClient", "FireAllClients", "InvokeServer", "Connect", "Once", "Wait", "Disconnect"):
                     report(path, i, f"método desconocido :{name}()")
             # propiedades asignadas: obj.Prop = valor  (Prop en mayúscula)

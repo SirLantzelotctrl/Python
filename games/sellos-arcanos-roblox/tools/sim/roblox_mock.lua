@@ -205,12 +205,39 @@ local SIGNALS = { PlayerAdded = true, PlayerRemoving = true, CharacterAdded = tr
 	Touched = true, Died = true, AncestryChanged = true, ChildRemoved = true, DescendantRemoving = true, Destroying = true,
 	PromptShown = true, PromptHidden = true, TouchTap = true }
 
+M.aligns = {}
 local function newInstance(class)
 	uid = uid + 1
+
 	local o = { ClassName = class, Name = class, _children = {}, _attrs = {}, _tags = {}, _id = uid, _signals = {} }
 	o.CFrame = CFrame.new()
 	o.Size = Vector3.new(1, 1, 1)
-	return setmetatable(o, Inst)
+	setmetatable(o, Inst)
+	if class == "AlignPosition" then table.insert(M.aligns, o) end
+	return o
+end
+
+-- «físicas»: cada AlignPosition lleva su pieza (y su modelo) a la posición
+-- pedida, como haría el motor de Roblox
+function M.physics()
+	for i = #M.aligns, 1, -1 do
+		local ap = M.aligns[i]
+		if rawget(ap, "_destroyed") then
+			table.remove(M.aligns, i)
+		else
+			local att = rawget(ap, "Attachment0")
+			local part = att and att.Parent
+			if part and rawget(ap, "CFrame") then
+				local model = part.Parent
+				local target = rawget(ap, "CFrame").Position
+				if model and model.ClassName == "Model" then
+					model:PivotTo(CFrame.new(target))
+				else
+					rawset(part, "CFrame", CFrame.new(target))
+				end
+			end
+		end
+	end
 end
 
 local function signalOf(o, name)

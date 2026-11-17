@@ -8,6 +8,7 @@ local Config = require(Shared.Config)
 local Net = require(Shared.Net)
 
 local DataService = require(script.Parent.DataService)
+local Codes = require(script.Parent.Codes)
 
 local Progression = {}
 
@@ -374,6 +375,69 @@ function Actions.settings(player, p, music, sfx)
 	return false
 end
 
+-- --- códigos y grupo ---------------------------------------------------------------
+local function grantReward(p, r)
+	p.crystals = p.crystals + (r.crystals or 0)
+	p.essence = p.essence + (r.essence or 0)
+	if r.ink then
+		p.ink = math.min(Config.InkMax * 2, p.ink + r.ink)
+	end
+	return { crystals = r.crystals, essence = r.essence, ink = r.ink }
+end
+
+-- límite de intentos para que no se puedan adivinar códigos a la fuerza
+local attempts = {}
+function Actions.redeem(player, p, code)
+	local now = os.clock()
+	local a = attempts[player]
+	if not a or now - a.t > 60 then
+		a = { t = now, n = 0 }
+		attempts[player] = a
+	end
+	a.n = a.n + 1
+	if a.n > 6 then
+		return false, "codeWait"
+	end
+	if type(code) ~= "string" or #code > 40 then
+		return false, "codeInvalid"
+	end
+	code = string.upper((string.gsub(code, "%s", "")))
+	local def = Codes[code]
+	if not def then
+		return false, "codeInvalid"
+	end
+	if def.expires and os.date("!%Y-%m-%d") > def.expires then
+		return false, "codeExpired"
+	end
+	p.codes = p.codes or {}
+	if p.codes[code] then
+		return false, "codeUsed"
+	end
+	p.codes[code] = os.time()
+	return true, grantReward(p, def)
+end
+
+function Actions.groupReward(player, p)
+	if not Config.GroupId or Config.GroupId == 0 then
+		return false, "codeInvalid"
+	end
+	if p.perks.group then
+		return false, "codeUsed"
+	end
+	local ok, inGroup = pcall(function()
+		return player:IsInGroupAsync(Config.GroupId)
+	end)
+	if not ok or not inGroup then
+		return false, "groupJoin"
+	end
+	p.perks.group = true
+	return true, grantReward(p, Config.GroupReward)
+end
+
+game:GetService("Players").PlayerRemoving:Connect(function(player)
+	attempts[player] = nil
+end)
+
 -- el cliente pide el perfil al arrancar (por si el primer envío llegó antes
 -- de que estuviera escuchando)
 function Actions.sync()
@@ -384,7 +448,22 @@ Progression.Actions = Actions
 Progression.onChange = nil -- lo asigna Main para refrescar criaturas en el mundo
 
 function Progression.init()
+	-- como mucho 40 acciones cada 2 s por jugador (nadie pulsa tan rápido)
+	local rate = {}
+	game:GetService("Players").PlayerRemoving:Connect(function(player)
+		rate[player] = nil
+	end)
 	Net.get("Action").OnServerInvoke = function(player, name, a, b, c)
+		local now = os.clock()
+		local r = rate[player]
+		if not r or now - r.t > 2 then
+			r = { t = now, n = 0 }
+			rate[player] = r
+		end
+		r.n = r.n + 1
+		if r.n > 40 then
+			return false
+		end
 		local p = DataService.get(player)
 		local fn = Actions[name]
 		if not p or not fn or type(name) ~= "string" then

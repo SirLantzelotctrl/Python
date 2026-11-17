@@ -100,7 +100,7 @@ TweenInfo = { new = function(t)
 end }
 Rect = { new = function(a, b, c, d) return tagged({ Min = Vector2.new(a, b), Max = Vector2.new(c, d) }, "Rect") end }
 RaycastParams = { new = function() return tagged({ FilterDescendantsInstances = {} }, "RaycastParams") end }
-os.clock = os.clock or function() return M.now end
+os.clock = function() return M.now end -- tiempo simulado
 
 -- --- propiedades por defecto al leer -------------------------------------------------------
 local GUI = { ScreenGui = true, BillboardGui = true, SurfaceGui = true, Frame = true, TextLabel = true, TextButton = true, TextBox = true,
@@ -211,6 +211,14 @@ function SG:SetCoreGuiEnabled() end
 function SG:SetCore() end
 local MS = M.services.MarketplaceService
 function MS:PromptGamePassPurchase() end
+M.priceQueries = 0
+function MS:GetProductInfoAsync(id, infoType)
+	assert(type(id) == "number" and id > 0, "GetProductInfoAsync: id inválido")
+	assert(typeof(infoType) == "EnumItem", "GetProductInfoAsync: InfoType inválido")
+	M.priceQueries = M.priceQueries + 1
+	task.wait(0.2)
+	return { PriceInRobux = 199, Name = "Producto " .. id }
+end
 
 local HS = M.services.HttpService
 function HS:JSONDecode(s)

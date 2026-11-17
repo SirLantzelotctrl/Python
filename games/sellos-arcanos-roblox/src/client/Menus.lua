@@ -20,6 +20,29 @@ local C = UI.C
 local player = Players.LocalPlayer
 Menus.current = nil
 
+-- Precio real de cada producto: Roblox puede cambiarlo (precios regionales u
+-- optimización de precios), así que se consulta y se guarda. Mientras llega se
+-- muestra «R$ …» y, si la consulta falla, el precio de Config.
+local prices = {}
+local function priceText(id, infoType, fallback)
+	local key = infoType.Name .. ":" .. tostring(id)
+	local v = prices[key]
+	if v == nil then
+		prices[key] = false
+		task.spawn(function()
+			local ok, info = pcall(function()
+				return MarketplaceService:GetProductInfoAsync(id, infoType)
+			end)
+			prices[key] = (ok and info and info.PriceInRobux) or fallback
+			if Menus.current == "shop" and Menus.shop then
+				Menus.shop(Menus.shopTab)
+			end
+		end)
+		v = false
+	end
+	return "R$ " .. (v and tostring(v) or "…")
+end
+
 local function action(name, a, b, c)
 	local ok, res, err = pcall(function()
 		return Net.get("Action"):InvokeServer(name, a, b, c)
@@ -314,6 +337,61 @@ function Menus.ficha(id)
 end
 
 -- --- Tienda ---------------------------------------------------------------------------------
+-- Pestaña «Códigos»: canjear un código y la recompensa por unirse al grupo
+function Menus.codesTab(scroll, card)
+	local p = State.profile
+	local f = card(1, UI.t("codesTitle"), UI.t("codesHelp"), C.crystal, UI.t("redeem"), true, nil)
+	local box = UI.new("TextBox", {
+		Name = "CodeBox",
+		PlaceholderText = UI.t("codePlaceholder"),
+		Text = "",
+		ClearTextOnFocus = false,
+		TextSize = 16,
+		Font = UI.F.bold,
+		TextColor3 = C.bright,
+		PlaceholderColor3 = C.muted,
+		BackgroundColor3 = C.night,
+		Position = UDim2.new(0, 0, 1, -86),
+		Size = UDim2.new(1, 0, 0, 38),
+	}, f)
+	UI.corner(box, 6)
+	UI.stroke(box, C.line2, 1)
+	local btn = f:FindFirstChildOfClass("TextButton")
+	local busy = false
+	btn.Activated:Connect(function()
+		local code = box.Text
+		if busy or #code == 0 then
+			return
+		end
+		busy = true
+		local ok, res, info = pcall(function()
+			return Net.get("Action"):InvokeServer("redeem", code)
+		end)
+		busy = false
+		if ok and res then
+			box.Text = ""
+			Fx.sound("glass", 1.3, 0.5)
+			UI.toast(UI.t("codeOk", { r = rewardText(info or {}) }), "gold")
+		else
+			UI.toast(UI.t((ok and info) or "codeInvalid"), "bad")
+		end
+	end)
+	if Config.GroupId and Config.GroupId ~= 0 and p and not p.perks.group then
+		card(2, UI.t("groupTitle"), UI.t("groupDesc", { r = rewardText(Config.GroupReward) }), C.gold, UI.t("groupClaim"), false, function()
+			local ok, res, info = pcall(function()
+				return Net.get("Action"):InvokeServer("groupReward")
+			end)
+			if ok and res then
+				Fx.sound("glass", 1.3, 0.5)
+				UI.toast(UI.t("groupDone") .. " · " .. rewardText(info or {}), "gold")
+				Menus.shop("codes")
+			else
+				UI.toast(UI.t((ok and info) or "groupJoin"), "bad")
+			end
+		end)
+	end
+end
+
 function Menus.shop(tab)
 	local p = State.profile
 	if not p then
@@ -323,7 +401,7 @@ function Menus.shop(tab)
 	local body = UI.window(UI.t("shop") .. " · " .. UI.fmt(p.crystals) .. " " .. UI.t("crystals"), 1100, 640)
 	local tabs = UI.new("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 40) }, body)
 	UI.list(tabs, Enum.FillDirection.Horizontal, 8)
-	for i, k in ipairs({ "crystals", "passes", "tints", "seals", "effects" }) do
+	for i, k in ipairs({ "crystals", "passes", "tints", "seals", "effects", "codes" }) do
 		local key = "tab" .. string.upper(string.sub(k, 1, 1)) .. string.sub(k, 2)
 		UI.button(tabs, UI.t(key), { LayoutOrder = i, Size = UDim2.fromOffset(150, 38), Primary = (k == tab) }, function()
 			Menus.shop(k)
@@ -346,7 +424,7 @@ function Menus.shop(tab)
 			if prod.id ~= 0 and not (prod.founder and p.purchases.founder) then
 				any = true
 				local desc = prod.founder and UI.t("pack_fundador_desc") or (prod.tag and UI.t("tag_" .. prod.tag) or "")
-				card(i, UI.t(prod.key), desc, prod.founder and C.gold or C.crystal, "R$ " .. prod.robux, true, function()
+				card(i, UI.t(prod.key), desc, prod.founder and C.gold or C.crystal, priceText(prod.id, Enum.InfoType.Product, prod.robux), true, function()
 					MarketplaceService:PromptProductPurchase(player, prod.id)
 				end)
 			end
@@ -358,7 +436,7 @@ function Menus.shop(tab)
 		local order = 1
 		for key, pass in pairs(Config.GamePasses) do
 			if pass.id ~= 0 then
-				card(order, UI.t(key), UI.t(key .. "_desc"), C.gold, "R$ " .. pass.robux, true, function()
+				card(order, UI.t(key), UI.t(key .. "_desc"), C.gold, priceText(pass.id, Enum.InfoType.GamePass, pass.robux), true, function()
 					MarketplaceService:PromptGamePassPurchase(player, pass.id)
 				end)
 				order = order + 1
@@ -390,6 +468,8 @@ function Menus.shop(tab)
 				end)
 			end)
 		end
+	elseif tab == "codes" then
+		Menus.codesTab(scroll, card)
 	else
 		local list = (tab == "seals") and GameData.Seals or GameData.Effects
 		local kind = (tab == "seals") and "seal" or "effect"
@@ -516,7 +596,8 @@ end
 function Menus.refresh()
 	if Menus.current == "citadel" then
 		Menus.citadel()
-	elseif Menus.current == "shop" then
+	elseif Menus.current == "shop" and Menus.shopTab ~= "codes" then
+		-- (en «Códigos» no se redibuja para no borrar lo que se está escribiendo)
 		Menus.shop(Menus.shopTab)
 	end
 end

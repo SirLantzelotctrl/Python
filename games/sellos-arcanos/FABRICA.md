@@ -1,4 +1,4 @@
-# Fábrica de juegos web
+# Fábrica de juegos (web y Roblox)
 
 Sellos Arcanos está construido para que el siguiente juego cueste mucho menos. Esta guía explica qué partes se reutilizan tal cual y qué se cambia.
 
@@ -44,6 +44,34 @@ Sellos Arcanos está construido para que el siguiente juego cueste mucho menos. 
 - [ ] Envío a CrazyGames, Poki, GameDistribution, itch.io.
 - [ ] Calendario de publicaciones de `marketing/LANZAMIENTO.md`.
 
+## Fábrica de juegos de Roblox
+
+La versión de Roblox está en `../sellos-arcanos-roblox/` y es la principal. Para el siguiente juego de Roblox se reutiliza tal cual:
+
+| Pieza | Qué hace |
+|---|---|
+| `src/server/DataService.lua` | Guardado en DataStore con bloqueo de sesión, autoguardado y campos nuevos sin borrar progreso |
+| `src/server/ShopService.lua` | Productos de Robux con recibos sin duplicados, pases, regalo a Premium |
+| `src/server/Codes.lua` + `Actions.redeem` | Códigos canjeables solo en el servidor y con límite de intentos; recompensa por unirse al grupo |
+| `src/shared/Net.lua` | RemoteEvents y RemoteFunctions con nombre |
+| `src/client/UI.lua` | Ventanas, botones, barras, avisos y escala para PC, móvil y consola |
+| `tools/sim/` | Roblox simulado: juega una partida entera contra el servidor y el cliente reales (`--touch` para móvil) |
+| `tools/check_api.py` | Valida clases, propiedades, enums y métodos contra la API oficial y avisa de las obsoletas |
+| `tools/build_place.py` | Genera el `.rbxlx` y el zip listo para abrir en Studio |
+| `tools/make_roblox_images.py` | Icono y miniaturas con los tamaños de Roblox |
+
+Para un juego nuevo se cambian los datos (`tools/gen_shared.mjs` los genera desde `src/data/` de la web), las reglas (`CombatCore`, `Encounters`), las pantallas (`Menus`, `Hud`) y los textos (`Strings`). Después:
+
+```bash
+npm run build
+```
+
+```bash
+python3 -I tools/sim/run_sim.py
+```
+
+Antes de publicar, el escenario de `tools/sim/scenario.lua` debe pasar entero, tanto en escritorio como con `--touch`.
+
 ## Sobre Roblox
 
-El documento de diseño original es para Roblox. La versión web ya está lista para publicar hoy; los datos de `src/data/` (criaturas, estadísticas, habilidades, islas, tienda) y el `LEEME.txt` del paquete de arte sirven para montar la versión de Roblox en Roblox Studio (importar los .obj, materiales Neon, Bloom). Publicar en Roblox requiere tu cuenta y Roblox Studio en tu ordenador.
+La guía para publicar paso a paso está en `../sellos-arcanos-roblox/GUIA_PUBLICAR.md`, y el plan de promoción en `MARKETING_ROBLOX.md`. Publicar requiere tu cuenta y Roblox Studio en tu ordenador: el juego se abre desde `releases/SellosArcanos.rbxlx`, se importan los 12 modelos y se publica.

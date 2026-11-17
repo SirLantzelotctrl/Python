@@ -31,6 +31,14 @@ Config.PassPremiumCrystals = 800
 Config.PremiumDailyCrystals = 5
 Config.VipDailyCrystals = 5
 
+-- Grupo de Roblox de la experiencia (su número de ID). Quien se une y lo reclama
+-- en Tienda → Códigos recibe la recompensa una vez. Con 0 no se muestra.
+Config.GroupId = 0
+Config.GroupReward = { crystals = 30, essence = 300 }
+
+-- Los códigos canjeables están en ServerScriptService → Server → Codes (no se
+-- envían a los jugadores).
+
 -- Recursos opcionales (IDs de imagen o audio que subas tú). Con 0 el juego usa
 -- su versión procedural: círculos hechos con piezas de neón y sin música.
 Config.Assets = {
@@ -49,6 +57,10 @@ Config.WildRespawn = 14
 Config.AggroRange = 34
 Config.LeashRange = 90
 Config.TeamSizeBase = 2 -- 3 desde el rango 10
+
+-- Giro de los modelos importados para que miren hacia delante. Si alguna
+-- criatura camina de espaldas, prueba con 0.
+Config.ModelYawOffset = 180
 
 -- Tamaño de las criaturas en studs (LEEME: Cría 3-4, jefe Primordial 12-20).
 Config.FormHeights = { 4.2, 6, 8 }
