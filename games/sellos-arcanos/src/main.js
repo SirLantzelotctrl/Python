@@ -64,6 +64,8 @@ async function boot() {
   });
   window.addEventListener('pagehide', () => save());
 
+  // métricas de visitas en la web propia (Vercel Web Analytics; sin cookies)
+  if (platform.name === 'web') import('@vercel/analytics').then((m) => m.inject({ mode: 'production' })).catch(() => {});
   document.getElementById('boot').remove();
   platform.loadingStop();
 

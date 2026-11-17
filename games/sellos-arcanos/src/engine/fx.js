@@ -112,6 +112,22 @@ export class Particles {
 }
 
 // --- mallas efímeras: anillos, avisos, rayos, proyectiles -------------------
+let _beamTex = null;
+function beamTex() {
+  if (_beamTex) return _beamTex;
+  const c = document.createElement('canvas');
+  c.width = 4;
+  c.height = 128;
+  const ctx = c.getContext('2d');
+  const gr = ctx.createLinearGradient(0, 0, 0, 128);
+  gr.addColorStop(0, 'rgba(255,255,255,0)');
+  gr.addColorStop(0.6, 'rgba(255,255,255,0.35)');
+  gr.addColorStop(1, 'rgba(255,255,255,1)');
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, 4, 128);
+  _beamTex = new THREE.CanvasTexture(c);
+  return _beamTex;
+}
 const ringGeo = new THREE.RingGeometry(0.92, 1, 64);
 const discGeo = new THREE.CircleGeometry(1, 48);
 const sphereGeo = new THREE.IcosahedronGeometry(1, 1);
@@ -228,14 +244,14 @@ export class FX {
     mesh.children[0].material.dispose();
   }
 
-  // columna de luz (sellado, invocación, rayos del cielo)
+  // columna de luz (sellado, invocación, rayos del cielo): se desvanece hacia arriba
   beam(pos, color, height = 12, radius = 0.6, life = 0.6) {
-    const g = new THREE.CylinderGeometry(radius, radius * 1.4, height, 16, 1, true);
+    const g = new THREE.CylinderGeometry(radius * 0.6, radius, height, 20, 1, true);
     g.translate(0, height / 2, 0);
-    const m = new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(0.8), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
+    const m = new THREE.MeshBasicMaterial({ map: beamTex(), color: new THREE.Color(color).multiplyScalar(0.9), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
     const mesh = new THREE.Mesh(g, m);
     mesh.position.set(pos.x, 0, pos.z);
-    this.add(mesh, life, (it, k) => { m.opacity = k * 0.6; mesh.scale.x = mesh.scale.z = 0.5 + k * 0.5; if (k <= 0) g.dispose(); });
+    this.add(mesh, life, (it, k) => { m.opacity = Math.min(1, (1 - k) * 6) * k * 0.55; mesh.scale.x = mesh.scale.z = 0.5 + k * 0.5; if (k <= 0) g.dispose(); });
   }
 
   update(dt) {

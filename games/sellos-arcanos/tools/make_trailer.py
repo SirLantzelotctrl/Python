@@ -16,8 +16,8 @@ TMP = os.path.splitext(OUT)[0] + "_tmp"
 os.makedirs(TMP, exist_ok=True)
 
 TEXTS = {
-    "es": [(0.3, 3.4, "COMBATE EN TIEMPO REAL"), (3.6, 6.4, "LIBERA TU DEFINITIVA"), (7.2, 10.6, "TRAZA SU RUNA"), (10.7, 12.6, "¡Y SÉLLALA!"), (12.8, 17.4, "12 PRIMORDIALES TE ESPERAN")],
-    "en": [(0.3, 3.4, "REAL-TIME BATTLES"), (3.6, 6.4, "UNLEASH YOUR ULTIMATE"), (7.2, 10.6, "TRACE ITS RUNE"), (10.7, 12.6, "AND SEAL IT!"), (12.8, 17.4, "12 PRIMORDIALS AWAIT")],
+    "es": [(0.3, 2.4, "COMBATE EN TIEMPO REAL"), (2.6, 4.3, "LIBERA TU DEFINITIVA"), (5.2, 7.2, "TRAZA SU RUNA"), (7.3, 8.9, "¡Y SÉLLALA!"), (9.2, 13.4, "12 PRIMORDIALES TE ESPERAN")],
+    "en": [(0.3, 2.4, "REAL-TIME BATTLES"), (2.6, 4.3, "UNLEASH YOUR ULTIMATE"), (5.2, 7.2, "TRACE ITS RUNE"), (7.3, 8.9, "AND SEAL IT!"), (9.2, 13.4, "12 PRIMORDIALS AWAIT")],
 }[LANG]
 
 n_frames = len([f for f in os.listdir(FRAMES) if f.endswith(".jpg")])

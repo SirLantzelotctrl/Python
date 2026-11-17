@@ -1,0 +1,197 @@
+-- Textos de la interfaz en español e inglés (se elige por el idioma del jugador).
+local S = {}
+
+local function s(es, en)
+	return { es = es, en = en }
+end
+
+S.T = {
+	gameTitle = s("SELLOS ARCANOS", "ARCANE SEALS"),
+	tagline = s("Invoca · Sella · Domina", "Summon · Seal · Rule"),
+	-- menú
+	bestiary = s("Bestiario", "Bestiary"),
+	team = s("Equipo", "Team"),
+	shop = s("Tienda", "Shop"),
+	pass = s("Pase Arcano", "Arcane Pass"),
+	citadel = s("Ciudadela", "Citadel"),
+	settings = s("Ajustes", "Settings"),
+	close = s("Cerrar", "Close"),
+	back = s("Volver", "Back"),
+	-- monedas
+	essence = s("Esencia", "Essence"),
+	ink = s("Tinta Rúnica", "Runic Ink"),
+	crystals = s("Cristales", "Crystals"),
+	-- HUD
+	hp = s("Vida", "HP"),
+	energy = s("Energía", "Energy"),
+	sealBar = s("Sello", "Seal"),
+	lvl = s("Nv", "Lv"),
+	dodge = s("Esquivar", "Dodge"),
+	traceSeal = s("TRAZAR SELLO", "TRACE SEAL"),
+	sealCost = s("Gasta 1 Tinta Rúnica · te quedan {n}", "Costs 1 Runic Ink · {n} left"),
+	bossSealFree = s("El sello del Primordial no gasta Tinta", "Sealing a Primordial costs no Ink"),
+	noInk = s("Sin Tinta Rúnica: se recarga sola (1 cada 10 min)", "No Runic Ink: it refills on its own (1 every 10 min)"),
+	sealable = s("SELLABLE", "SEALABLE"),
+	beats = s("vence a", "beats"),
+	immuneAnchors = s("Protegido: rompe las anclas", "Shielded: break the anchors"),
+	anchor = s("Ancla rúnica", "Rune anchor"),
+	contract = s("Contrato", "Contract"),
+	-- formas y roles
+	form1 = s("Cría", "Hatchling"),
+	form2 = s("Adulta", "Adult"),
+	form3 = s("Primordial", "Primordial"),
+	-- avisos del servidor
+	milestone = s("¡Hito del Bestiario: {n} formas! +{c} cristales", "Bestiary milestone: {n} forms! +{c} crystals"),
+	rankUp = s("¡Rango {n}!", "Rank {n}!"),
+	thirdSlot = s("¡Rango 10! Ya puedes llevar 3 criaturas en el equipo", "Rank 10! You can now bring 3 creatures"),
+	contractDone = s("¡Contrato completado! Recógelo en la Ciudadela", "Contract complete! Claim it at the Citadel"),
+	premiumGift = s("Regalo Premium del día: +{n} cristales", "Daily Premium gift: +{n} crystals"),
+	vipGift = s("Regalo VIP del día: +{n} cristales", "Daily VIP gift: +{n} crystals"),
+	notEnoughEssence = s("Te falta Esencia", "Not enough Essence"),
+	notEnoughCrystals = s("Te faltan cristales", "Not enough crystals"),
+	teamMin = s("Tu equipo necesita al menos una criatura", "Your team needs at least one creature"),
+	teamFull = s("Tu equipo está completo: quita una antes", "Your team is full: remove one first"),
+	teamFell = s("Tu equipo ha caído. La Fuente del Sello lo restaura en la Ciudadela.", "Your team has fallen. The Seal Fountain restores it at the Citadel."),
+	chooseFirstToast = s("Primero elige tu criatura", "Choose your creature first"),
+	portalLocked = s("Sella antes al Primordial de la isla {isle}", "Seal the Primordial of island {isle} first"),
+	islandEnter = s("Isla {i}", "Island {i}"),
+	levelUp = s("¡{name} sube al nivel {n}!", "{name} reached level {n}!"),
+	bossAppears = s("¡Un Primordial despierta!", "A Primordial awakens!"),
+	phase = s("Fase {n}", "Phase {n}"),
+	anchors = s("Rompe las cuatro anclas rúnicas", "Break the four rune anchors"),
+	anchorsBroken = s("¡Anclas rotas! Ya puedes sellarlo", "Anchors broken! You can seal it now"),
+	restored = s("La Fuente del Sello restaura a tu equipo", "The Seal Fountain restores your team"),
+	purchaseDone = s("¡Compra completada! Gracias por apoyar el juego", "Purchase complete! Thanks for supporting the game"),
+	goPortal = s("Cruza el portal dorado de la Arboleda Astral (isla 1)", "Go through the golden portal to the Astral Grove (island 1)"),
+	ult = s("¡Definitiva!", "Ultimate!"),
+	sealOpen = s("¡Sello abierto! Traza su runa", "Seal open! Trace its rune"),
+	resist = s("El sello resiste", "The seal resists"),
+	miss = s("Esquivado", "Dodged"),
+	immune = s("Inmune", "Immune"),
+	-- sellado
+	sealing = s("SELLADO", "SEALING"),
+	traceTitle = s("Traza el sello: {name}", "Trace the seal: {name}"),
+	traceHelp = s("Une los nodos en orden antes de que el círculo se apague.", "Connect the nodes in order before the circle fades."),
+	struggle = s("La criatura forcejea: los nodos tiemblan.", "The creature struggles: the nodes tremble."),
+	perfect = s("¡TRAZO PERFECTO!", "PERFECT TRACE!"),
+	sealed = s("¡SELLADO!", "SEALED!"),
+	failed = s("EL SELLO RESISTE", "THE SEAL RESISTS"),
+	perfectBonus = s("Vínculo alto y +50 % de Esencia", "Strong bond and +50% Essence"),
+	-- recompensas
+	newCreature = s("¡Nueva criatura en tu grimorio: {name}!", "New creature in your grimoire: {name}!"),
+	dupCreature = s("{name} sellada: más vínculo y fragmentos", "{name} sealed: more bond and fragments"),
+	rewardLine = s("+{e} Esencia · +{x} XP", "+{e} Essence · +{x} XP"),
+	islandUnlocked = s("¡Nueva isla desbloqueada: {isle}!", "New island unlocked: {isle}!"),
+	firstClear = s("+{c} Cristales por el primer sellado", "+{c} Crystals for the first seal"),
+	-- inicial
+	chooseTitle = s("Elige tu primera criatura", "Choose your first creature"),
+	chooseHelp = s("Las doce Bestias Primordiales escaparon cuando se rompió el Sello del Vacío. Vincúlate con una Cría para empezar a sellarlas.", "The twelve Primordial Beasts broke free when the Void Seal shattered. Bond with a hatchling to start sealing them."),
+	choose = s("Sellar el pacto", "Seal the pact"),
+	-- bestiario y ficha
+	formsSealed = s("{n} / 36 formas selladas", "{n} / 36 forms sealed"),
+	unknown = s("Por descubrir", "Undiscovered"),
+	seenNot = s("Vista · sin sellar", "Seen · not sealed"),
+	livesIn = s("Vive en la isla {n}: {isle}", "Lives on island {n}: {isle}"),
+	level = s("Nivel", "Level"),
+	bond = s("Vínculo", "Bond"),
+	addTeam = s("Añadir al equipo", "Add to team"),
+	removeTeam = s("Quitar del equipo", "Remove from team"),
+	makeLeader = s("Hacer líder", "Make leader"),
+	train = s("Entrenar · {c} Esencia", "Train · {c} Essence"),
+	evolve = s("Evolucionar a {f}", "Evolve to {f}"),
+	evoReq1 = s("Adulta: nivel 20 y 30 Fragmentos (tienes {h})", "Adult: level 20 and 30 Fragments (you have {h})"),
+	evoReq2 = s("Primordial: nivel 40 y sellar al jefe de su isla", "Primordial: level 40 and seal its island's boss"),
+	stats = s("Estadísticas · 300 puntos", "Stats · 300 points"),
+	power = s("Poder", "Power"),
+	defense = s("Defensa", "Defense"),
+	agility = s("Agilidad", "Agility"),
+	magic = s("Magia", "Magic"),
+	abilities = s("Habilidades", "Abilities"),
+	ultimateTag = s("Definitiva", "Ultimate"),
+	unlocksAdult = s("Se desbloquea en la forma Adulta", "Unlocks in the Adult form"),
+	tints = s("Tintes de brillo", "Glow tints"),
+	original = s("Original", "Original"),
+	inTeam = s("EN EL EQUIPO", "IN TEAM"),
+	-- tienda
+	tabCrystals = s("Cristales", "Crystals"),
+	tabPasses = s("Pases", "Passes"),
+	tabTints = s("Tintes", "Tints"),
+	tabSeals = s("Sellos", "Seals"),
+	tabEffects = s("Efectos", "Effects"),
+	buy = s("Comprar", "Buy"),
+	owned = s("Tuyo", "Owned"),
+	equip = s("Equipar", "Equip"),
+	equipped = s("Equipado", "Equipped"),
+	confirmBuy = s("¿Comprar «{name}» por {p} cristales?", "Buy “{name}” for {p} crystals?"),
+	yes = s("Sí", "Yes"),
+	no = s("No", "No"),
+	rules = s("Sin compras al azar · Ves el precio antes de comprar · Nada da poder: solo apariencia", "No random purchases · You see the price first · Nothing gives power: looks only"),
+	tintFor = s("Para {name}", "For {name}"),
+	productsOff = s("Los productos aún no están configurados (ver GUIA_PUBLICAR.md).", "Products are not configured yet (see GUIA_PUBLICAR.md)."),
+	cristales_100 = s("100 Cristales", "100 Crystals"),
+	cristales_550 = s("550 Cristales", "550 Crystals"),
+	cristales_1200 = s("1200 Cristales", "1200 Crystals"),
+	cristales_2600 = s("2600 Cristales", "2600 Crystals"),
+	pack_fundador = s("Pack del Fundador", "Founder Pack"),
+	pack_fundador_desc = s("500 Cristales + tinte Prisma + Corona Solar + Lluvia de estrellas (una vez)", "500 Crystals + Prism tint + Solar Crown + Starfall (once)"),
+	pase_premium = s("Pase Arcano Premium", "Arcane Pass Premium"),
+	pase_premium_desc = s("Desbloquea la pista premium de la temporada Eclipse", "Unlocks the Eclipse season premium track"),
+	vip = s("Sellador VIP", "VIP Sealer"),
+	vip_desc = s("Sello del Eclipse exclusivo, título VIP y +5 cristales al día", "Exclusive Eclipse seal, VIP title and +5 crystals a day"),
+	tag_popular = s("POPULAR", "POPULAR"),
+	tag_bonus = s("+9 % EXTRA", "+9% BONUS"),
+	tag_value = s("MEJOR VALOR", "BEST VALUE"),
+	-- pase
+	passLevel = s("Nivel {n} de 30", "Tier {n} of 30"),
+	free = s("Gratis", "Free"),
+	premium = s("Premium", "Premium"),
+	claim = s("Reclamar", "Claim"),
+	claimed = s("Reclamado", "Claimed"),
+	unlockPremium = s("Desbloquear premium · {c} cristales", "Unlock premium · {c} crystals"),
+	premiumActive = s("Pista premium activa", "Premium track active"),
+	passHelp = s("Ganas XP de pase al derrotar y sellar criaturas, vencer jefes y completar contratos.", "Earn pass XP by defeating and sealing creatures, beating bosses and finishing contracts."),
+	-- ciudadela
+	rank = s("Rango {n}", "Rank {n}"),
+	daily = s("Recompensa diaria", "Daily reward"),
+	dayOf = s("Día {n} de 7", "Day {n} of 7"),
+	dailyContracts = s("Contratos del día", "Today's contracts"),
+	c_seal = s("Sella {n} criaturas", "Seal {n} creatures"),
+	c_perfect = s("Logra {n} trazo perfecto", "Land {n} perfect trace"),
+	c_kills = s("Derrota a {n} criaturas", "Defeat {n} creatures"),
+	c_ult = s("Usa la Definitiva {n} veces", "Use your Ultimate {n} times"),
+	c_boss = s("Sella a {n} Primordial", "Seal {n} Primordial"),
+	c_advantage = s("Golpea {n} veces con ventaja de dominio", "Land {n} hits with domain advantage"),
+	-- ajustes
+	music = s("Música", "Music"),
+	sounds = s("Sonidos", "Sounds"),
+	language = s("Idioma", "Language"),
+	controls = s("Controles", "Controls"),
+	controlsText = s(
+		"PC: Q · E · R habilidades · F Definitiva · Shift esquivar · 1 2 3 cambiar de criatura · Tab objetivo · G trazar sello · clic en un enemigo para fijarlo.\nMóvil: botones de la derecha.\nMando: X · Y · B habilidades · RB Definitiva · LB esquivar · cruceta cambiar · RT sellar.",
+		"PC: Q · E · R abilities · F Ultimate · Shift dodge · 1 2 3 switch creature · Tab target · G trace seal · click an enemy to lock it.\nMobile: buttons on the right.\nGamepad: X · Y · B abilities · RB Ultimate · LB dodge · D-pad switch · RT seal."
+	),
+	-- mundo
+	travel = s("Viajar", "Travel"),
+	returnCitadel = s("Volver a la Ciudadela", "Return to the Citadel"),
+	challenge = s("Desafiar al Primordial", "Challenge the Primordial"),
+	restore = s("Restaurar equipo", "Restore team"),
+	fountain = s("Fuente del Sello", "Seal Fountain"),
+	locked = s("Bloqueada", "Locked"),
+	islandLevels = s("Isla {n} · Nv {a}–{b}", "Island {n} · Lv {a}–{b}"),
+	tutorial1 = s("Muévete con WASD o el joystick. Tu criatura te sigue y ataca sola al enemigo fijado.", "Move with WASD or the joystick. Your creature follows you and auto-attacks your target."),
+	tutorial2 = s("Usa Q · E · R (o los botones) para sus habilidades. Sal de los círculos rojos.", "Use Q · E · R (or the buttons) for abilities. Get out of the red circles."),
+	tutorial3 = s("Bájale la vida a menos del 25 % y pulsa TRAZAR SELLO para capturarla.", "Drop its HP below 25% and press TRACE SEAL to capture it."),
+}
+
+function S.get(key, lang, vars)
+	local e = S.T[key]
+	local str = e and (e[lang] or e.es) or key
+	if vars then
+		for k, v in pairs(vars) do
+			str = string.gsub(str, "{" .. k .. "}", tostring(v))
+		end
+	end
+	return str
+end
+
+return S

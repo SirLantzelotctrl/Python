@@ -11,6 +11,7 @@
     "assets": "python3 -I tools/build_assets.py"
   },
   "dependencies": {
+    "@vercel/analytics": "1.4.1",
     "three": "0.170.0"
   },
   "devDependencies": {

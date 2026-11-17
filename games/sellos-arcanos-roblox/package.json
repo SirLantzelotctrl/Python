@@ -1,0 +1,13 @@
+{
+  "name": "sellos-arcanos-roblox-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gen": "node tools/gen_shared.mjs",
+    "check": "node tools/check_lua.mjs",
+    "build": "npm run gen && npm run check && python3 -I tools/build_place.py"
+  },
+  "devDependencies": {
+    "luaparse": "0.3.1"
+  }
+}

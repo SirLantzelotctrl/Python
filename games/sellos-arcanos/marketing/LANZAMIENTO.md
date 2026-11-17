@@ -86,3 +86,10 @@ Regla del diseño que mantenemos: nada se compra al azar y nada da poder. Esto a
 ## 8. Fábrica de juegos: cómo hacer el siguiente
 
 Este juego está hecho para reutilizarse (ver `../FABRICA.md`). Para el siguiente juego copias la carpeta, cambias `src/data/` (criaturas, habilidades, islas, tienda) y el arte, y mantienes igual: plataformas, anuncios, pagos, guardado, idiomas, audio y el generador de imágenes promocionales.
+
+## 9. Antes de cobrar: lo legal mínimo
+
+- **Stripe** te pedirá una web con política de reembolsos, términos y forma de contacto. Añade esas páginas a tu dominio (pueden ser sencillas) y pon el enlace en la configuración de Stripe.
+- **Menores**: el público incluye menores de edad. Mantén la tienda solo cosmética, sin compras al azar (ya está así) y no pidas datos personales (el juego no los pide). En la UE y EE. UU. los anuncios personalizados a menores están restringidos: los portales lo gestionan con su SDK; en tu web propia activa en AdSense la opción de anuncios no personalizados para tráfico infantil.
+- **Impuestos**: Stripe Tax puede calcular el IVA de las compras digitales si vendes en Europa.
+- **Métricas**: la web propia lleva Vercel Web Analytics (sin cookies). Actívalo en el panel de Vercel → Analytics.
