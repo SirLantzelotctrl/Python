@@ -1,0 +1,19 @@
+{
+  "name": "sellos-arcanos",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "build:portal": "vite build --mode portal",
+    "preview": "vite preview --host",
+    "assets": "python3 -I tools/build_assets.py"
+  },
+  "dependencies": {
+    "three": "0.170.0"
+  },
+  "devDependencies": {
+    "vite": "6.0.7"
+  }
+}

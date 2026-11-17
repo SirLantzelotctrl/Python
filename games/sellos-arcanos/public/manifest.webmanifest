@@ -1,0 +1,14 @@
+{
+  "name": "Sellos Arcanos",
+  "short_name": "Sellos Arcanos",
+  "description": "Invoca. Sella. Domina. Acción y colección de criaturas en 3D.",
+  "start_url": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#090817",
+  "theme_color": "#090817",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,77 @@
+// Las 12 islas del Velo, en orden de desbloqueo (documento de diseño).
+// pool: especies salvajes (Crías) que aparecen; boss: el Primordial de la isla.
+// props: decorado procedural del escenario.
+
+const I = (id, es, en, dEs, dEn, lv, boss, pool, props) => ({
+  id, name: { es, en }, desc: { es: dEs, en: dEn }, levels: lv, boss, pool, props,
+});
+
+export const ISLANDS = [
+  I('arboleda', 'Arboleda Astral', 'Astral Grove',
+    'Bosque nocturno con flores que brillan.', 'A night forest with glowing flowers.',
+    [1, 8], 'ciervo', ['ciervo', 'golem'], 'flores'),
+  I('cantera', 'Cantera Rúnica', 'Runic Quarry',
+    'Ruinas con runas que abren atajos.', 'Ruins whose runes open shortcuts.',
+    [6, 14], 'golem', ['golem', 'tortuga', 'ciervo'], 'pilares'),
+  I('pantano', 'Pantano Esmeralda', 'Emerald Marsh',
+    'Niebla tóxica y estatuas de aventureros petrificados.', 'Toxic fog and petrified adventurers.',
+    [12, 20], 'basilisco', ['basilisco', 'aracna', 'golem'], 'estatuas'),
+  I('picos', 'Picos Helados', 'Frozen Peaks',
+    'Suelo resbaladizo y ventiscas que tapan la vista.', 'Slippery ground and blinding blizzards.',
+    [18, 26], 'wyvern', ['wyvern', 'grifo', 'tortuga'], 'hielo'),
+  I('nido', 'Nido de Tormentas', 'Storm Nest',
+    'Islotes unidos por corrientes de viento.', 'Islets joined by wind currents.',
+    [22, 30], 'grifo', ['grifo', 'wyvern', 'fenix'], 'rocas'),
+  I('desierto', 'Desierto de Cristal', 'Crystal Desert',
+    'Dunas que se mueven y cristales que reflejan ataques.', 'Shifting dunes and mirror crystals.',
+    [26, 34], 'tortuga', ['tortuga', 'basilisco', 'cerbero'], 'cristales'),
+  I('forja', 'Forja Solar', 'Solar Forge',
+    'Volcán con ríos de luz y plataformas que arden.', 'A volcano with rivers of light.',
+    [30, 38], 'fenix', ['fenix', 'cerbero', 'golem'], 'lava'),
+  I('fosa', 'Fosa Abisal', 'Abyssal Trench',
+    'Medio sumergida: la única luz es la de las criaturas.', 'Half-sunken: the only light is the creatures’.',
+    [34, 42], 'kraken', ['kraken', 'leviatan', 'wyvern'], 'corales'),
+  I('telar', 'Telar Umbrío', 'Shadow Loom',
+    'Telarañas-sello que hay que cortar para avanzar.', 'Seal-webs you must cut to advance.',
+    [38, 46], 'aracna', ['aracna', 'basilisco', 'hidra'], 'telas'),
+  I('puertas', 'Puertas del Inframundo', 'Underworld Gates',
+    'Arena de fuego con tres puertas y tres guardianes.', 'A fire arena with three gates.',
+    [42, 50], 'cerbero', ['cerbero', 'fenix', 'aracna'], 'lava'),
+  I('mar', 'Mar de Estrellas', 'Sea of Stars',
+    'Islas en el cielo; se viaja montado en criaturas.', 'Islands in the sky, travelled on creatures.',
+    [46, 55], 'leviatan', ['leviatan', 'grifo', 'kraken'], 'estrellas'),
+  I('corazon', 'Corazón del Vacío', 'Heart of the Void',
+    'Incursión final: el suelo se rompe en cada fase.', 'Final raid: the ground breaks each phase.',
+    [55, 60], 'hidra', ['hidra', 'aracna', 'leviatan'], 'vacio'),
+];
+
+export const TIPS = {
+  es: [
+    'Lleva tres dominios distintos en tu equipo: así nunca te quedarás sin ventaja.',
+    'Abisal vence a Ígneo, Ígneo a Natural, Natural a Arcano y Arcano a Abisal.',
+    'Una criatura se puede sellar cuando su vida baja del 25 %.',
+    'Un trazo perfecto da +50 % de Esencia y un vínculo inicial alto.',
+    'La Tinta Rúnica se recarga sola: 1 cada 10 minutos, hasta 10.',
+    'Golpear llena la barra de Sello. Al 100 % libera la Definitiva (F).',
+    'Esquiva (Espacio) te vuelve intocable durante un instante.',
+    'Cambia de criatura (1 · 2 · 3) para aprovechar la ventaja de dominio.',
+    'Los círculos rojos en el suelo avisan de un ataque: sal de ellos.',
+    'En la tercera fase, rompe las cuatro anclas rúnicas para poder sellar al Primordial.',
+    'Las Crías evolucionan a Adultas en el nivel 20 con 30 Fragmentos de su elemento.',
+    'Completa contratos diarios para ganar Esencia y avanzar el Pase Arcano.',
+  ],
+  en: [
+    'Bring three different domains: you will never run out of advantage.',
+    'Abyssal beats Igneous, Igneous beats Natural, Natural beats Arcane and Arcane beats Abyssal.',
+    'A creature can be sealed once its HP drops below 25%.',
+    'A perfect trace grants +50% Essence and a strong starting bond.',
+    'Runic Ink refills on its own: 1 every 10 minutes, up to 10.',
+    'Hitting fills the Seal bar. At 100% it unleashes the Ultimate (F).',
+    'Dodge (Space) makes you untouchable for an instant.',
+    'Switch creatures (1 · 2 · 3) to exploit domain advantage.',
+    'Red circles on the ground warn of an attack: get out of them.',
+    'In the third phase, break the four rune anchors to seal the Primordial.',
+    'Hatchlings evolve into Adults at level 20 with 30 Fragments of their element.',
+    'Finish daily contracts to earn Essence and progress the Arcane Pass.',
+  ],
+};

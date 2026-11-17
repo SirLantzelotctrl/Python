@@ -1,0 +1,50 @@
+# Sellos Arcanos - materiales de Grifo de Tormenta
+newmtl Cuerpo2
+Ka 0.0000 0.0000 0.0000
+Kd 0.3619 0.3745 0.4583
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Cuerpo
+Ka 0.0000 0.0000 0.0000
+Kd 0.2900 0.3057 0.3807
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Hueso
+Ka 0.0000 0.0000 0.0000
+Kd 0.5449 0.5510 0.6681
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Ojos
+Ka 0.0000 0.0000 0.0000
+Kd 0.3098 0.7059 1.0000
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 0.3098 0.7059 1.0000
+
+newmtl Brillo
+Ka 0.0000 0.0000 0.0000
+Kd 0.3098 0.7059 1.0000
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 0.3098 0.7059 1.0000
+
+newmtl Plumaje
+Ka 0.0000 0.0000 0.0000
+Kd 0.3619 0.3745 0.4583
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2

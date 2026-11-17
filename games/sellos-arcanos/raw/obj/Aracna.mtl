@@ -1,0 +1,34 @@
+# Sellos Arcanos - materiales de Reina Aracna
+newmtl Cuerpo
+Ka 0.0000 0.0000 0.0000
+Kd 0.3417 0.2869 0.3711
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Brillo
+Ka 0.0000 0.0000 0.0000
+Kd 1.0000 0.3098 0.8235
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 1.0000 0.3098 0.8235
+
+newmtl Ojos
+Ka 0.0000 0.0000 0.0000
+Kd 1.0000 0.3098 0.8235
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 1.0000 0.3098 0.8235
+
+newmtl Hueso
+Ka 0.0000 0.0000 0.0000
+Kd 0.6102 0.5270 0.6555
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2

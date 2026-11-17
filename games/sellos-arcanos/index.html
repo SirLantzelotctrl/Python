@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Sellos Arcanos · Invoca. Sella. Domina.</title>
+<meta name="description" content="Juego de acción y colección de criaturas en 3D, gratis en tu navegador. Combate bestias de piedra y luz, traza su runa para sellarlas y completa el Bestiario de los 12 Primordiales.">
+<meta name="theme-color" content="#090817">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="./icon-32.png">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sellos Arcanos · Invoca. Sella. Domina.">
+<meta property="og:description" content="Combate bestias legendarias en 3D, traza su runa para sellarlas y colecciona las 36 formas de los 12 Primordiales. Gratis en el navegador, en PC y móvil.">
+<meta property="og:image" content="./og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"Sellos Arcanos","alternateName":"Arcane Seals","genre":["Action RPG","Creature collector"],"gamePlatform":["Web browser","PC","Mobile"],"applicationCategory":"Game","operatingSystem":"Any","inLanguage":["es","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Juego de acción y colección de criaturas en 3D: combate, traza la runa y sella a las 12 Bestias Primordiales."}
+</script>
+<style>
+  html,body{margin:0;height:100%;background:#090817;overflow:hidden}
+  #boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#c4bfdc;font:600 15px/1.2 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;z-index:100;background:#090817}
+  #boot .ring{width:64px;height:64px;border-radius:50%;border:2px solid #3b3658;border-top-color:#b06bff;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="area"></div>
+<div id="dmg"></div>
+<div id="ui"></div>
+<div id="joy"><div id="knob"></div></div>
+<div id="modal-root"></div>
+<div id="toast"></div>
+<div id="boot"><div class="ring"></div><span id="boot-txt">Sellos Arcanos</span></div>
+<noscript>Sellos Arcanos necesita JavaScript y WebGL.</noscript>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

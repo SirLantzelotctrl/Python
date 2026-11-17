@@ -1,0 +1,84 @@
+SELLOS ARCANOS · Modelos 3D y recursos
+=======================================
+
+CONTENIDO
+  obj/                  Las 12 criaturas en .obj + .mtl, en la pose de sus tarjetas.
+  texturas/             Círculos mágicos (3 diseños, por capas) y halo, en blanco sobre
+                        transparente para teñirlos del color de cada elemento.
+  renders/criaturas/    Retrato de cada criatura, 1000 × 1000 px.
+  renders/siluetas/     Silueta blanca de cada criatura (entradas sin descubrir del Bestiario).
+  renders/tintes/       Cuatro ejemplos de tintes de brillo para la tienda.
+  renders/escenas/      Arte clave, menú, combate (PC y móvil), sellado, carga, miniatura
+                        e ícono, sin textos, para montar las pantallas.
+
+DATOS DE LOS MODELOS
+  - Eje Y hacia arriba; la criatura mira hacia +Z. Miden unas 3-4 unidades de alto.
+  - Cada modelo viene separado en objetos por material: Cuerpo, Cuerpo2, Hueso, Brillo,
+    Ojos y, según la criatura, Plumaje, Plumas, Membrana, Cristal, CristalTenue,
+    Estrellas u Oscuro.
+  - Ninguna pieza pasa de 19 000 triángulos (Roblox admite hasta 20 000 por malla).
+  - Las alas, plumas y membranas llevan caras por los dos lados.
+
+  Criatura              Elemento   Triángulos  Piezas
+  Hidra del Vacío       Vacío          21 476  5
+  Fénix Solar           Fuego           9 322  6
+  Kraken Abisal         Abismo         11 832  6
+  Grifo de Tormenta     Rayo            9 286  6
+  Cerbero Infernal      Infierno       11 782  5
+  Basilisco Esmeralda   Veneno         10 908  6
+  Wyvern de Escarcha    Hielo           8 344  7
+  Gólem Rúnico          Tierra          6 532  7
+  Leviatán Celeste      Cosmos          9 554  7
+  Reina Aracna          Sombra          6 212  4
+  Ciervo Astral         Luz             7 428  7
+  Tortuga Ancestral     Cristal         8 010  7
+
+IMPORTAR EN ROBLOX STUDIO
+  1. Importar 3D → elige el .obj de la criatura. Cada objeto llega como un MeshPart
+     dentro de un Model.
+  2. MeshParts Brillo, Ojos, Plumas, Cristal y Estrellas: Material = Neon y Color = el
+     color del elemento (tabla de abajo). CristalTenue: Glass o Neon con Transparency 0.4.
+  3. Cuerpo, Cuerpo2, Plumaje, Membrana y Oscuro: Material = Slate o SmoothPlastic, con el
+     color de cuerpo de la tabla. Hueso: SmoothPlastic con el color de hueso.
+  4. Tamaño: selecciona el Model y usa la herramienta Escalar o Model:ScaleTo(n).
+     Un jefe Primordial mide de 12 a 20 studs; una Cría, de 3 a 4.
+  5. Ancla las piezas (Anchored) o suéldalas con WeldConstraint a una pieza raíz.
+  6. En Lighting añade un Bloom (Intensity ~1, Size ~24) y baja Threshold hasta que el neón
+     brille sin quemar el resto. Atmosphere tenue y cielo oscuro (#090817) completan el look.
+
+COLORES (Color3.fromRGB)
+  Criatura              Brillo (elemento)           Cuerpo           Hueso
+  Hidra del Vacío       #b06bff  (176, 107, 255)    (80, 74, 100) (146, 136, 174)
+  Fénix Solar           #ff7a2e  (255, 122, 46)     (86, 75, 87)  (155, 136, 157)
+  Kraken Abisal         #2ff2d6  (47, 242, 214)     (73, 81, 92)  (138, 144, 164)
+  Grifo de Tormenta     #4fb4ff  (79, 180, 255)     (74, 78, 97)  (139, 141, 170)
+  Cerbero Infernal      #ff3d3d  (255, 61, 61)      (89, 73, 87)  (158, 134, 158)
+  Basilisco Esmeralda   #3dff88  (61, 255, 136)     (73, 81, 89)  (138, 145, 159)
+  Wyvern de Escarcha    #9fefff  (159, 239, 255)    (76, 80, 94)  (142, 143, 167)
+  Gólem Rúnico          #ffb23e  (255, 178, 62)     (75, 65, 58)  (151, 139, 158)
+  Leviatán Celeste      #7f8cff  (127, 140, 255)    (63, 68, 106) (142, 138, 173)
+  Reina Aracna          #ff4fd2  (255, 79, 210)     (87, 73, 95)  (156, 134, 167)
+  Ciervo Astral         #ffd76a  (255, 215, 106)    (83, 79, 85)  (149, 141, 158)
+  Tortuga Ancestral     #b4ff4a  (180, 255, 74)     (79, 83, 71)  (143, 144, 158)
+
+CÍRCULO MÁGICO EN ROBLOX
+  - Diseños: hexagrama (Hidra, Grifo, Wyvern, Aracna), heptagrama (Fénix, Basilisco,
+    Leviatán, Ciervo) y pentagrama (Kraken, Cerbero, Gólem, Tortuga).
+  - Sube los PNG al Gestor de recursos. Crea una Part plana (por ejemplo 14 × 0.05 × 14),
+    Transparency 1, Anchored y CanCollide desactivado, y ponle un Decal en la cara Top.
+  - Tíñelo con Decal.Color3 = color del elemento.
+  - Si lo quieres más luminoso, usa en su lugar un SurfaceGui en la cara Top con un ImageLabel
+    (ImageColor3 = color del elemento), LightInfluence = 0 y Brightness entre 2 y 4.
+  - Versión animada: una Part por capa (exterior, medio, interior) y gíralas con RunService;
+    exterior lento, medio en sentido contrario e interior más rápido, como en el lienzo.
+  - halo.png va detrás de la cabeza de la Hidra o del Fénix: BillboardGui con un ImageLabel
+    e ImageColor3 al color del elemento.
+
+ANIMACIÓN
+  Los modelos son estáticos. Para darles vida:
+  - Rig completo: importa el .obj en Blender (Archivo → Importar → Wavefront, ejes por
+    defecto), añade huesos y exporta a .fbx para Roblox.
+  - Sin rig: mueve piezas con TweenService (respirar escalando el Model, latido del Brillo
+    con Transparency, giro de los círculos).
+
+Más detalles del juego en el documento de diseño "Sellos Arcanos".

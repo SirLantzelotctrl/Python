@@ -1,0 +1,42 @@
+# Sellos Arcanos - materiales de Hidra del Vacío
+newmtl Cuerpo
+Ka 0.0000 0.0000 0.0000
+Kd 0.3138 0.2919 0.3907
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Hueso
+Ka 0.0000 0.0000 0.0000
+Kd 0.5745 0.5334 0.6813
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Brillo
+Ka 0.0000 0.0000 0.0000
+Kd 0.6902 0.4196 1.0000
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 0.6902 0.4196 1.0000
+
+newmtl Ojos
+Ka 0.0000 0.0000 0.0000
+Kd 0.6902 0.4196 1.0000
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 0.6902 0.4196 1.0000
+
+newmtl Cuerpo2
+Ka 0.0000 0.0000 0.0000
+Kd 0.3864 0.3602 0.4689
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2

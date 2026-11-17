@@ -1,0 +1,42 @@
+# Sellos Arcanos - materiales de Cerbero Infernal
+newmtl Cuerpo
+Ka 0.0000 0.0000 0.0000
+Kd 0.3486 0.2853 0.3427
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Hueso
+Ka 0.0000 0.0000 0.0000
+Kd 0.6191 0.5250 0.6189
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+
+newmtl Brillo
+Ka 0.0000 0.0000 0.0000
+Kd 1.0000 0.2392 0.2392
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 1.0000 0.2392 0.2392
+
+newmtl Ojos
+Ka 0.0000 0.0000 0.0000
+Kd 1.0000 0.2392 0.2392
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2
+Ke 1.0000 0.2392 0.2392
+
+newmtl Cuerpo2
+Ka 0.0000 0.0000 0.0000
+Kd 0.4227 0.3534 0.4183
+Ks 0.2000 0.2000 0.2000
+Ns 60
+d 1
+illum 2

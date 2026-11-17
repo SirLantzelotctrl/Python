@@ -1,0 +1,254 @@
+[
+ {
+  "num": "01",
+  "file": "Hidra",
+  "color": "#b06bff",
+  "name": {
+   "es": "Hidra del Vacío",
+   "en": "Void Hydra"
+  },
+  "sub": {
+   "es": "Jefe colosal · Cinco cabezas",
+   "en": "Colossal boss · Five heads"
+  },
+  "lore": {
+   "es": "Cada cabeza recuerda una estrella que devoró. Si cortas una, el vacío hace crecer dos.",
+   "en": "Each head remembers a star it devoured. Cut one off and the void grows two."
+  },
+  "el": {
+   "es": "Vacío",
+   "en": "Void"
+  }
+ },
+ {
+  "num": "02",
+  "file": "Fenix",
+  "color": "#ff7a2e",
+  "name": {
+   "es": "Fénix Solar",
+   "en": "Solar Phoenix"
+  },
+  "sub": {
+   "es": "Ave legendaria · Renace de su ceniza",
+   "en": "Legendary bird · Reborn from its ashes"
+  },
+  "lore": {
+   "es": "Cuando muere se convierte en amanecer. Sus plumas siguen ardiendo mil años después de caer.",
+   "en": "When it dies it becomes a sunrise. Its feathers keep burning a thousand years after they fall."
+  },
+  "el": {
+   "es": "Fuego",
+   "en": "Fire"
+  }
+ },
+ {
+  "num": "03",
+  "file": "Kraken",
+  "color": "#2ff2d6",
+  "name": {
+   "es": "Kraken Abisal",
+   "en": "Abyssal Kraken"
+  },
+  "sub": {
+   "es": "Titán marino · Ocho brazos",
+   "en": "Sea titan · Eight arms"
+  },
+  "lore": {
+   "es": "Duerme bajo la fosa más honda del océano. Sus ojos son la única luz que ven los barcos hundidos.",
+   "en": "It sleeps beneath the ocean's deepest trench. Its eyes are the only light sunken ships ever see."
+  },
+  "el": {
+   "es": "Abismo",
+   "en": "Abyss"
+  }
+ },
+ {
+  "num": "04",
+  "file": "Grifo",
+  "color": "#4fb4ff",
+  "name": {
+   "es": "Grifo de Tormenta",
+   "en": "Storm Griffin"
+  },
+  "sub": {
+   "es": "Guardián alado · Cazador del cielo",
+   "en": "Winged guardian · Sky hunter"
+  },
+  "lore": {
+   "es": "Mitad águila, mitad león. Cada batir de alas suelta un relámpago sobre quien ose tocar su nido.",
+   "en": "Half eagle, half lion. Every beat of its wings looses lightning on whoever dares touch its nest."
+  },
+  "el": {
+   "es": "Rayo",
+   "en": "Lightning"
+  }
+ },
+ {
+  "num": "05",
+  "file": "Cerbero",
+  "color": "#ff3d3d",
+  "name": {
+   "es": "Cerbero Infernal",
+   "en": "Infernal Cerberus"
+  },
+  "sub": {
+   "es": "Guardián del umbral · Tres cabezas",
+   "en": "Threshold guardian · Three heads"
+  },
+  "lore": {
+   "es": "Una cabeza vigila el pasado, otra el presente y la última el futuro. Ninguna duerme jamás.",
+   "en": "One head watches the past, another the present and the last the future. None of them ever sleeps."
+  },
+  "el": {
+   "es": "Infierno",
+   "en": "Inferno"
+  }
+ },
+ {
+  "num": "06",
+  "file": "Basilisco",
+  "color": "#3dff88",
+  "name": {
+   "es": "Basilisco Esmeralda",
+   "en": "Emerald Basilisk"
+  },
+  "sub": {
+   "es": "Rey de las serpientes · Mirada de piedra",
+   "en": "King of serpents · Stone gaze"
+  },
+  "lore": {
+   "es": "Su corona es de hueso y su mirada, de piedra. Quienes lo enfrentaron siguen en pie, convertidos en estatuas.",
+   "en": "Its crown is bone and its gaze is stone. Those who faced it still stand, turned to statues."
+  },
+  "el": {
+   "es": "Veneno",
+   "en": "Poison"
+  }
+ },
+ {
+  "num": "07",
+  "file": "Wyvern",
+  "color": "#9fefff",
+  "name": {
+   "es": "Wyvern de Escarcha",
+   "en": "Frost Wyvern"
+  },
+  "sub": {
+   "es": "Dragón bípedo · Aliento helado",
+   "en": "Two-legged dragon · Frost breath"
+  },
+  "lore": {
+   "es": "Anida en los picos donde el viento no deja huellas. Su aliento convierte la lluvia en cristal.",
+   "en": "It nests on peaks where the wind leaves no tracks. Its breath turns rain into crystal."
+  },
+  "el": {
+   "es": "Hielo",
+   "en": "Ice"
+  }
+ },
+ {
+  "num": "08",
+  "file": "Golem",
+  "color": "#ffb23e",
+  "name": {
+   "es": "Gólem Rúnico",
+   "en": "Runic Golem"
+  },
+  "sub": {
+   "es": "Constructo ancestral · Corazón de runas",
+   "en": "Ancient construct · Heart of runes"
+  },
+  "lore": {
+   "es": "Ninguna de sus rocas se toca. Lo mantiene unido una sola runa encendida en el pecho.",
+   "en": "None of its rocks touch. A single rune burning in its chest holds it together."
+  },
+  "el": {
+   "es": "Tierra",
+   "en": "Earth"
+  }
+ },
+ {
+  "num": "09",
+  "file": "Leviatan",
+  "color": "#7f8cff",
+  "name": {
+   "es": "Leviatán Celeste",
+   "en": "Celestial Leviathan"
+  },
+  "sub": {
+   "es": "Titán del cielo · Nada entre estrellas",
+   "en": "Sky titan · Swims among stars"
+  },
+  "lore": {
+   "es": "Las constelaciones de su piel cambian cada noche. Los astrónomos antiguos lo confundían con el cielo.",
+   "en": "The constellations on its skin change every night. Ancient astronomers mistook it for the sky."
+  },
+  "el": {
+   "es": "Cosmos",
+   "en": "Cosmos"
+  }
+ },
+ {
+  "num": "10",
+  "file": "Aracna",
+  "color": "#ff4fd2",
+  "name": {
+   "es": "Reina Aracna",
+   "en": "Arachne Queen"
+  },
+  "sub": {
+   "es": "Matriarca · Ocho ojos",
+   "en": "Matriarch · Eight eyes"
+  },
+  "lore": {
+   "es": "Teje sellos en lugar de telarañas. Cada hilo que toca el suelo es un hechizo a punto de cerrarse.",
+   "en": "She weaves seals instead of webs. Every thread that touches the ground is a spell about to close."
+  },
+  "el": {
+   "es": "Sombra",
+   "en": "Shadow"
+  }
+ },
+ {
+  "num": "11",
+  "file": "Ciervo",
+  "color": "#ffd76a",
+  "name": {
+   "es": "Ciervo Astral",
+   "en": "Astral Stag"
+  },
+  "sub": {
+   "es": "Espíritu del bosque · Astas de cristal",
+   "en": "Forest spirit · Crystal antlers"
+  },
+  "lore": {
+   "es": "Solo aparece en noches sin luna. Donde pisa nacen flores que brillan hasta el amanecer.",
+   "en": "It only appears on moonless nights. Where it steps, flowers bloom that glow until dawn."
+  },
+  "el": {
+   "es": "Luz",
+   "en": "Light"
+  }
+ },
+ {
+  "num": "12",
+  "file": "Tortuga",
+  "color": "#b4ff4a",
+  "name": {
+   "es": "Tortuga Ancestral",
+   "en": "Ancient Tortoise"
+  },
+  "sub": {
+   "es": "Titán milenario · Montaña viviente",
+   "en": "Thousand-year titan · Living mountain"
+  },
+  "lore": {
+   "es": "Lleva mil años caminando. Los cristales de su caparazón crecen un palmo cada siglo.",
+   "en": "It has been walking for a thousand years. The crystals on its shell grow a handspan every century."
+  },
+  "el": {
+   "es": "Cristal",
+   "en": "Crystal"
+  }
+ }
+]
