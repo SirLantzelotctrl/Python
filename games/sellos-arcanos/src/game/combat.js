@@ -891,6 +891,8 @@ export class Combat {
     const off = portrait ? new THREE.Vector3(0, 17, 12.5) : new THREE.Vector3(0, 10.5, 11);
     const tgt = this.currentTarget();
     const look = p.pos.clone();
+    // en vertical miramos un poco por delante para que el jugador quede abajo
+    if (portrait) look.z -= 3.5;
     if (tgt) look.lerp(tgt.pos, 0.25);
     if (this.boss && this.boss.alive) look.lerp(this.boss.pos, 0.15);
     const desired = look.clone().add(off);
